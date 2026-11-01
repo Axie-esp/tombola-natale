@@ -15,11 +15,14 @@
 .modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.open{display:flex}.panel{width:min(100%,390px);background:#fff9ed;color:#24372e;border-radius:17px;padding:24px;box-shadow:0 15px 50px #0006}.panel h2{font:700 26px 'Playfair Display',serif;color:#145c43;margin:0 0 8px}.panel p{font-size:12px;color:#59665f}.panel label{display:block;font-size:12px;font-weight:600;margin:13px 0 5px}.panel input{width:100%;padding:11px;border:1px solid #c9cfc8;border-radius:8px;font:14px Poppins}.panel-actions{display:flex;gap:9px;margin-top:18px}.panel-actions button{flex:1;padding:11px;border:0;border-radius:8px;font:600 13px Poppins;cursor:pointer}.primary{background:#145c43;color:white}.secondary{background:#e9e5dc;color:#26372f}.error{color:#a51e32!important;min-height:18px}
 @media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cell{gap:6px;padding:6px}.number{width:32px;height:32px}.cell input{font-size:11px}}@media(max-width:390px){.grid{grid-template-columns:1fr}}
 
-.paypal-box{max-width:520px;margin:22px auto;padding:20px;text-align:center;background:#fff9ed;color:#26372f;border:2px solid var(--gold);border-radius:16px;box-shadow:0 8px 25px #0004}
-.paypal-box h2{font:700 25px 'Playfair Display',serif;color:var(--green);margin:0 0 8px}
-.paypal-box p{font-size:12px;margin:6px 0 14px;color:#536057}
-.paypal-qr{display:block;width:190px;height:190px;max-width:70%;margin:12px auto;background:white;padding:8px;border-radius:8px}
-.paypal-url{font-size:11px!important;overflow-wrap:anywhere;color:#52645c!important}
+
+.hero-row{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(230px,.8fr);gap:16px;align-items:stretch;margin:20px auto;max-width:1080px}
+.hero-row .prize{width:100%;max-width:none;margin:0;display:flex;flex-direction:column;justify-content:center}
+.fee-box{background:var(--cream);color:var(--deep);border:2px solid var(--gold);border-radius:16px;padding:20px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 8px 25px #0004}
+.fee-box h2{font:700 23px 'Playfair Display',serif;color:var(--green);margin:0 0 14px}
+.fee-box strong{display:inline-block;background:var(--red);color:white;border-radius:40px;padding:9px 24px;font:700 38px 'Playfair Display',serif}
+.cancellation{margin:30px auto 0;padding:14px 18px;text-align:center;background:linear-gradient(120deg,#a51e32,#701426);border:2px solid var(--gold);border-radius:16px;color:white;font:700 18px 'Playfair Display',serif}
+@media(max-width:700px){.hero-row{grid-template-columns:1fr}.fee-box{padding:15px}.fee-box h2{font-size:21px}}
 
 </style>
 </head>
@@ -27,20 +30,16 @@
 <div class="container">
 <header><div class="ornament">✦ ❄ ✦</div><h1>La Tombola di Natale</h1><div class="subtitle">Il tuo numero fortunato ti aspetta</div></header>
 <div class="topbar"><span class="status" id="connectionStatus">Connessione in corso…</span><button class="admin-btn" id="adminButton">🔒 Area amministratore</button><button class="logout-btn" id="logoutButton" hidden>Esci</button></div>
+<div class="hero-row">
 <section class="prize"><small>🎁 PREMIO IN PALIO 🎁</small><h2>PlayStation 5</h2><p>Il primo numero estratto vince!</p></section>
-<section class="paypal-box" aria-label="Revolut">
-  <h2>🖤 Revolut</h2>
-  <p>Inquadra il QR Code per aprire direttamente il link Revolut.</p>
-  <img class="paypal-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAIAAABnRsZeAAAHHElEQVR4nO3cS45jNxQFQcvo/W+5PPXAIBpg0pdUR8z1qVdCgoMDfn5+fv4C6Pw9/QWAbyMrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWI/Zr64M/nM/XRh/z8/Ix87s6TPPed199q/bnnfhtTnztl6jfptALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxMZWtmtT68C1cyvMnU3qnc/qnDsXulPuXAY7rQAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAsUtXtmvft6TcWY6eW52+uGd98UbhtTvXvWtOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitA7MmV7Z9mau26s+79vnfm9zmtADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxK9v/ybkt7Nq5xeoUO9r7Oa0AMVkBYrICxGQFiMkKEJMVICYrQExWgJisALEnV7YvLinP3Uc7dfPr1H20O68998t58Td5jtMKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChC7dGV75y2qO87tWac+98XX7vi+3+Q5TitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQOzjDs7/x7nbaqfeeeoOXe7ntALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxJ5c2Z7blZ773O8z9cuZ+i9MLZJf5LQCxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsR+TX+B/zZ1i+ranTvLqc3x2s7T+L418592K7DTChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQu3Rlu+PcRvPF7e+OO2+NPWdqgX3nf3+H0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEPu8uGjcced9tOece853rnvvvJ33nDu/ldMKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChAbu8v2xVXiudeunXtWdy5l187dGfzi07iT0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEBtb2a6d26RO3WW787nftw2dehrnltD8m9MKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChD7vHin7JSp+2jPPas797tTNwpPbXBfvAV5zWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYhdepft2p2r050bWHdMvfO5m33PeXGDu3bnHt1pBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIjd1lu2Nq0bg2dSOpG3Z//7Vr7rKtOK0AMVkBYrICxGQFiMkKEJMVICYrQExWgJisALEn77LdMXWb6Z03oe585zv/orVzq9MX3/kcpxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVIDa2sj2379z53J3X3rmGnHpWdz6NtT/tt3GO0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEBtb2Z5bf07dKvrizvLcjvbc0zi3hV07d3fvi7+cNacVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSA2trJd29ksrt2577xzv3vunV/clU6te1/ktALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxD53Lhq/z7mV7dq5d94x9a2mdsNrU//9c5xWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoDY2F2233e759SdsusnOXWH7p2r07VzN+x+3452zWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYiNrWzX7twO3rkc3XlWU1vn73uSO+68b3iH0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKELt0Zbt2bnd457p3x7n7WXfceVvtOVOr4qn/r9MKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChB7cmX7ojtvb93ZaE7tO+/clf5pO9o1pxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVIGZl+7w7d5ZT9w2f26SeWyS/uHVec1oBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWJPrmzv3JWundt3nvvcnXe+c/25863O3Sj84pNcc1oBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKXrmzP3YR6pzt3tN/3rc69851r1ylOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitA7GMdCLScVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVIPYP35crF+5i0lkAAAAASUVORK5CYII=" alt="QR Code Revolut">
-  <a class="paypal-link" href="https://revolut.me/ccarf" target="_blank" rel="noopener noreferrer">Apri Revolut</a>
-  <p class="paypal-url">revolut.me/ccarf</p>
-</section>
+<section class="fee-box" aria-label="Quota di partecipazione"><h2>Quota di partecipazione</h2><strong>20 €</strong></section>
+</div>
 
 
 <div class="stats"><div class="stat"><strong id="assigned">0</strong><span>Numeri assegnati</span></div><div class="stat"><strong id="available">90</strong><span>Numeri disponibili</span></div></div>
 <h2 class="grid-title">✦ Tabellone dei 90 numeri ✦</h2><p class="hint" id="hint">Tabellone aggiornato automaticamente · modalità sola lettura</p>
 <div class="grid" id="grid" aria-live="polite"></div><div class="notice" id="notice" role="status"></div>
-<footer class="footer">✦ BUON NATALE E BUONA FORTUNA ✦</footer>
+<div class="cancellation">❄ Il concorso viene annullato con meno di 30 numeri presi ❄</div><footer class="footer">✦ BUON NATALE E BUONA FORTUNA ✦</footer>
 </div>
 <div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle"><form class="panel" id="loginForm"><h2 id="loginTitle">Accesso amministratore</h2><p>Inserisci le credenziali del tuo account Supabase per gestire i nominativi.</p><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><p class="error" id="loginError"></p><div class="panel-actions"><button type="button" class="secondary" id="cancelLogin">Annulla</button><button type="submit" class="primary" id="loginSubmit">Accedi</button></div></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
